@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ir al vacio</title>
+  
+  
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <div class="texto-bootes">
+    <h1>EL VACÍO DE BOÖTES</h1>
+    <p>Una gigantesca región del espacio de 330 millones de años luz de diámetro con poquísimas galaxias. Uno de los lugares más solitarios del universo.</p>
+  </div>
+
+  
+  <img src="imagenes/cohete.png" id="cohete" class="cohete" alt="cohete">
+
+  
+  <button id="btnVacio" class="btn-vacio">ir al vacio</button>
+
+   <div class="contenedor-tierra">
+    <img src="imagenes/tierra.png" class="tierra" alt="tierra">
+  </div>
+
+
+  <div class="estrella-fugaz ef-1"></div>
+  <div class="estrella-fugaz ef-2"></div>
+  <div class="estrella-fugaz ef-3"></div>
+
+    <script>
+    const btnVacio = document.getElementById('btnVacio');
+    const cohete = document.getElementById('cohete');
+    const paginaDestino = 'info.html';  
+
+    btnVacio.addEventListener('click', () => {
+      
+      cohete.classList.add('despegar');
+
+      
+      setTimeout(() => {
+        window.location.href = paginaDestino;
+      }, 2200);
+    });
+  </script>
+</body>
+</html>

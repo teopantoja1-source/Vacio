@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Vacío de Boötes - Info</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="info.css">
+</head>
+<body>
+
+<a href="index.html" class="btn-regresar" style="position:fixed;bottom:14px;left:14px;z-index:9999;background:#fff;color:#000;border:3px solid #000;padding:10px 16px;font-family:'Press Start 2P';font-size:8px;text-decoration:none;box-shadow:5px 5px 0 #000">← REGRESAR</a>
+
+<header class="encabezado"><h1>EL VACÍO DE BOÖTES</h1><p>Haz clic en una nave</p></header>
+
+<div class="contenedor-naves">
+  <div class="nave-item nave-1" onclick="mostrarInfo('dimensiones')"><img src="nave1.png" class="nave-img"><span class="nave-label">ALPHA</span></div>
+  <div class="nave-item nave-2" onclick="mostrarInfo('descubrimiento')"><img src="nave2.png" class="nave-img"><span class="nave-label">BETA</span></div>
+  <div class="nave-item nave-3" onclick="mostrarInfo('misterio')"><img src="nave3.png" class="nave-img"><span class="nave-label">GAMMA</span></div>
+</div>
+
+<div class="club-container">
+  <div class="club-luces"></div>
+  <img src="vacio.png" class="vacio-orbit" id="vacioClub">
+  <button class="btn-club" onclick="lanzarCohete()">IR AL CLUB</button>
+</div>
+
+<img src="cohete.png" id="cohete" class="cohete" alt="cohete">
+<div id="estela" class="estela"></div>
+
+<div id="modalInfo" class="modal-oculto">
+  <div class="contenido-modal">
+    <span style="float:right;color:#ff0055;cursor:pointer" onclick="cerrarInfo()">✕</span>
+    <h2 id="modalTitulo"></h2>
+    <div id="modalCuerpo"></div>
+    <center><button class="btn-cerrar" onclick="cerrarInfo()">CERRAR</button></center>
+  </div>
+</div>
+
+<script>
+const datos={
+dimensiones:{titulo:"DIMENSIONES DE LA NADA",texto:`<p>• Qué es: Es uno de los supervacíos más grandes conocidos en el universo observable.
+• Dimensiones: Tiene un diámetro aproximado de entre 250 y 330 millones de años luz (un radio de unos 62 megaparsecs).
+• Ubicación: Su centro se encuentra a unos 700 millones de años luz de la Tierra.
+• Contenido galáctico: Apenas alberga unas 60 galaxias conocidas. En una región del cosmos de un tamaño similar, los modelos astronómicos estiman que debería haber alrededor de 2,000 galaxias.
+• Descubrimiento: Fue detectado en 1981 por el astrónomo Robert Kirshner y su equipo mientras realizaban mapas tridimensionales del corrimiento al rojo de las galaxias.
+</p><ul><li>Volumen: 236,000 Mpc³</li><li>700M años luz de la Tierra</li><li>Debería tener 2,000 galaxias, solo 60</li></ul>`},
+descubrimiento:{titulo:"DESCUBRIMIENTO 1981",texto:`<p>
+• Estructura en espuma: A gran escala, el universo no se distribuye de manera uniforme; la materia se organiza en filamentos y paredes que rodean grandes burbujas de espacio vacío (similar a una espuma).
+• Fusión de vacíos: Se cree que el Vacío de Boötes se formó por la unión o coalescencia de varios vacíos cósmicos más pequeños a lo largo del tiempo, un proceso impulsado por la expansión del universo.
+• Consistencia con la física: Aunque su inmensidad sorprende, los astrofísicos señalan que su existencia no contradice el modelo estándar de la cosmología (ΛCDM de materia oscura fría).</p><ul><li>Paper: A million cubic megaparsec void</li><li>1987: 8 galaxias, 1997: 60</li></ul>`},
+misterio:{titulo:"CIELO TERRORIFICO",texto:`<p>"• Laboratorio cósmico: Al ser una zona con una densidad de materia extremadamente baja (unas 250 veces más vacía que el promedio del universo), permite estudiar cómo evoluciona el cosmos sin la interferencia gravitacional de grandes cúmulos de galaxias.
+• Fronteras: Está rodeado por estructuras masivas como los supercúmulos de Hércules y el Supercúmulo Corona Borealis.
+" - Aldering</p><ul><li>Cielo negro total</li><li>Fusión de vacíos como burbujas</li></ul>`}
+};
+function mostrarInfo(t){document.getElementById('modalTitulo').innerText=datos[t].titulo;document.getElementById('modalCuerpo').innerHTML=datos[t].texto;document.getElementById('modalInfo').className='modal-visible'}
+function cerrarInfo(){document.getElementById('modalInfo').className='modal-oculto'}
+function lanzarCohete(){
+  document.getElementById('cohete').classList.add('volando');
+  document.getElementById('estela').classList.add('activa');
+  document.querySelector('.btn-club').innerText="DESPEGANDO...";
+  document.querySelector('.club-luces').style.animation="fiestaLuces 0.15s infinite";
+  setTimeout(()=>{window.location.href='contenido.html';},1800);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-image: url('imagenes/espacio.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative; 
+}
+
+
+.contenedor-tierra {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 1300px;  /* Ajusta el tamaño de la Tierra aquí si lo deseas */
+  height: 1300px;
+}
+
+
+.tierra {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: girarTierra 20s linear infinite;
+}
+
+
+@keyframes girarTierra {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,210 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-image: url('imagenes/espacio.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative; 
+}
+
+/* --- INFORMACIÓN PIXELADA DE BOÖTES --- */
+.texto-bootes {
+  position: absolute;
+  top: 10%; /* Posición superior */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Press Start 2P', monospace;
+  z-index: 8;
+  width: 90%;
+  max-width: 750px;
+  pointer-events: none; /* Para no bloquear clics */
+}
+
+.texto-bootes h1 {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #00f3ff; /* Azul neón */
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
+}
+
+.texto-bootes p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #e0e0e0;
+  text-shadow: 2px 2px 0px #000000;
+}
+
+/* --- BOTÓN VACÍO --- */
+.btn-vacio {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.1); 
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-radius: 12px; 
+  cursor: pointer;
+  backdrop-filter: blur(6px); 
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+  transition: all 0.3s ease;
+  z-index: 10; 
+}
+
+.btn-vacio:hover {
+  background: rgba(0, 243, 255, 0.25);
+  border-color: #00f3ff;
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
+  transform: translateY(-3px); 
+}
+
+/* --- TIERRA --- */
+.contenedor-tierra {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 1000px;  
+  height: 1000px;
+}
+
+.tierra {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: girarTierra 20s linear infinite;
+}
+
+@keyframes girarTierra {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- COHETE Y FÍSICAS DE DESPEGUE --- */
+.cohete {
+  position: absolute;
+  bottom: 250px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;       
+  max-width: 120px;     
+  height: auto;        
+  z-index: 5;
+  transition: transform 0.2s ease;
+}
+
+.cohete.despegar {
+  animation: despegarCohete 2.2s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+}
+
+@keyframes despegarCohete {
+  0% {
+    bottom: 250px;
+    transform: translateX(-50%) scale(1);
+  }
+  20% {
+    bottom: 230px; 
+    transform: translateX(-50%) scale(1.05);
+  }
+  100% {
+    bottom: 120vh; 
+    transform: translateX(-50%) scale(0.6);
+  }
+}
+
+/* --- ESTRELLAS FUGACES --- */
+.estrella-fugaz {
+  position: absolute;
+  width: 120px; 
+  height: 2px;  
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  opacity: 0;
+  pointer-events: none; 
+  z-index: 2; 
+}
+
+.ef-1 {
+  top: 15%;
+  left: 75%;
+  animation: pasarEstrella 3s ease-in-out infinite;
+  animation-delay: 1s; 
+}
+
+.ef-2 {
+  top: 30%;
+  left: 90%;
+  animation: pasarEstrella 2.5s ease-in-out infinite;
+  animation-delay: 5s; 
+}
+
+.ef-3 {
+  top: 5%;
+  left: 50%;
+  animation: pasarEstrella 4s ease-in-out infinite;
+  animation-delay: 8s;
+}
+
+@keyframes pasarEstrella {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-500px) translateY(500px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* --- COHETE Y FÍSICAS DE DESPEGUE --- */
+.cohete {
+  position: absolute;
+  bottom: 250px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;       
+  max-width: 120px;     
+  height: auto;        
+  z-index: 5;
+  transition: transform 0.2s ease;
+}
+
+.cohete.despegar {
+  animation: despegarCohete 2.2s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+}
+
+@keyframes despegarCohete {
+  0% {
+    bottom: 250px;
+    transform: translateX(-50%) scale(1);
+  }
+  20% {
+    bottom: 230px; 
+    transform: translateX(-50%) scale(1.05);
+  }
+  100% {
+    bottom: 120vh; 
+    transform: translateX(-50%) scale(0.6);
+  }
+}

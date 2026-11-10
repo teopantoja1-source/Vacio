@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLUB DEL VACÍO</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bar.css">
+</head>
+<body>
+<div class="luces-fiesta"><div class="luz luz-rosa1"></div><div class="luz luz-cyan1"></div><div class="luz luz-rosa2"></div><div class="luz luz-cyan2"></div></div>
+<div class="estrobo"></div>
+
+<div class="header">
+  <h1><span class="cyan">CLUB DEL VACÍO -</span> <span class="pink">r/BootesVoid</span></h1>
+  <div class="btns">
+    <button class="btn btn-vacio" onclick="toggleFeed()">#VACIO</button>
+    <button class="btn btn-musica" onclick="toggleMusica()" id="btnM">MUSICA OFF</button>
+    
+    <a href="info.html" class="btn btn-regresar" style="text-decoration:none;background:#fff;color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000">REGRESAR</a>
+  </div>
+</div>
+
+<audio id="musica" loop><source src="imagenes/fiesta.mp3" type="audio/mpeg"></audio>
+
+<div class="among p1" onclick="abrir('rojo')"><img src="imagenes/among_rojo.png"><div class="label">u/AmongRojo</div></div>
+<div class="among p2" onclick="abrir('cyan')"><img src="imagenes/among_cyan.png"><div class="label">u/AmongCyan</div></div>
+<div class="among p3" onclick="abrir('amarillo')"><img src="imagenes/among_amarillo.png"><div class="label">u/AmongAmarillo</div></div>
+<div class="among p4" onclick="abrir('morado')"><img src="imagenes/among_morado.png"><div class="label">u/AmongMorado</div></div>
+<div class="among p5" onclick="abrir('blanco')"><img src="imagenes/among_blanco.png"><div class="label">AMA: Vacio</div></div>
+<div class="among p6" onclick="abrir('naranja')"><img src="imagenes/among_naranja.png"><div class="label">DJ Void</div></div>
+<div class="among p7" onclick="abrir('azul')"><img src="imagenes/among_azul.png"><div class="label">u/AmongAzul</div></div>
+
+<a href="contacto.html" id="puerta"><div class="marco"></div><div class="hueco"></div></a>
+
+<div id="feed" class="feed" onclick="toggleFeed()"><div onclick="event.stopPropagation()"><div style="text-align:center;margin-bottom:20px"><button class="btn" onclick="toggleFeed()" style="background:#000;color:#ff0055;border-color:#ff0055">X CERRAR FEED</button></div><div id="feedContent"></div></div></div>
+<div id="modal" class="modal" onclick="cerrar()"><div onclick="event.stopPropagation()" style="width:100%;max-width:650px"><div id="modalContent"></div><center><button class="btn" onclick="cerrar()" style="margin-top:15px;background:#000;color:#00f3ff;border-color:#00f3ff">CERRAR</button></center></div></div>
+
+<script>
+const data={
+azul:{user:'u/AmongAzul', tags:'• Guardia azul • hace 30m', title:'SOY EL ORIGINAL - EL QUE MANDARON', body:'Yo soy el azul tal cual lo mandaron, sin filtro. El que está en el centro del vacío vigilando que nadie se acerque al tubo de las 60 galaxias.', up:'5.5k upvotes • 89 comentarios', img:'among_azul.png'},
+rojo:{user:'u/AmongRojo', tags:'• Astrónomo impostor • hace 2h', title:'HIPOTESIS: El vacio es una zona de exterminio alien?', body:'Bro, piénsalo. 330 millones de años luz sin nada? Para mi que una civilización Tipo III barrió con todo.', up:'2.3k upvotes • 342 comentarios', img:'among_rojo.png'},
+cyan:{user:'u/AmongCyan', tags:'• Tripulante científico • hace 5h', title:'CURIOSIDAD: Si vives en el centro, tu cielo es negro', body:'Dato perturbador: Si la Vía Láctea estuviera en el centro del Vacío de Boötes, no habríamos descubierto otras galaxias hasta los años 60s.', up:'4.1k upvotes • 512 comentarios', img:'among_cyan.png'},
+amarillo:{user:'u/AmongAmarillo', tags:'• Teórico conspiranoico • hace 1h', title:'Teoría burbujas de jabón', body:'El vacío no nació grande, se hizo. Vacíos chiquitos se fusionaron como burbujas.', up:'1.8k upvotes • 98 comentarios', img:'among_amarillo.png'},
+morado:{user:'u/AmongMorado', tags:'• Filósofo del vacío • hace 8h', title:'¿Y si nosotros somos el vacío?', body:'¿Y si lo que vemos como vacío es en realidad materia oscura super densa?', up:'892 upvotes • 210 comentarios', img:'among_morado.png'},
+blanco:{user:'u/VacioBootes_Official', tags:'• AMA Oficial • hace 12h', title:'AMA: Soy el Vacío de Boötes, pregunten', body:'Soy 10 veces menos denso que el resto. Me descubrieron en 1981 y pensaron que estaba 100% vacío. Tengo 60 galaxias formando un tubo.', up:'10k upvotes • 1.2k comentarios', img:'among_blanco.png'},
+naranja:{user:'u/DJ_Void', tags:'• DJ Residente • LIVE ahora', title:'🔊 REVENTON EN LA PISTA - PISTA LIBRE', body:'El Vacío de Boötes tiene 330 millones de años luz de diámetro y aquí lo estamos celebrando. La gravedad no aplica en la pista.', up:'3.3k upvotes • 666 comentarios', img:'among_naranja.png'}
+}
+function cardHTML(d){return `<div class="post-card"><div class="post-head"><img src="imagenes/${d.img}"><div class="meta"><div class="user">${d.user}</div><div class="tags">${d.tags}</div></div></div><h2>${d.title}</h2><div class="body">${d.body}</div><div class="stats">▲ ${d.up}</div></div>`}
+function abrir(id){document.getElementById('modalContent').innerHTML=cardHTML(data[id]);document.getElementById('modal').classList.add('activo')}
+function cerrar(){document.getElementById('modal').classList.remove('activo')}
+function toggleFeed(){const f=document.getElementById('feed');if(!f.classList.contains('activo')){let html='';Object.values(data).forEach(d=>{html+=cardHTML(d)});document.getElementById('feedContent').innerHTML=html;f.classList.add('activo')}else{f.classList.remove('activo')}}
+function toggleMusica(){const m=document.getElementById('musica');const b=document.getElementById('btnM');if(m.paused){m.volume=0.5;m.play();b.innerText='MUSICA ON'}else{m.pause();b.innerText='MUSICA OFF'}}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100vw;min-height:100vh;background:#000;overflow:hidden;font-family:'Courier Prime',monospace;display:flex;justify-content:center;align-items:center}
+#galaxy{position:fixed;inset:0;z-index:0}
+.resplandor{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:1100px;height:1100px;background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.5) 12%, rgba(180,180,180,0.15) 30%, transparent 65%);filter:blur(18px);z-index:1;pointer-events:none;animation:pulse 5s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.2)}}
+.scan{position:fixed;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 3px)}
+.contenedor{position:relative;z-index:10;width:100%;max-width:580px;padding:20px}
+.top-bar{display:flex;justify-content:space-between;position:fixed;top:12px;left:12px;right:12px;z-index:30}
+.btn-mute{font-family:'Press Start 2P';font-size:7px;background:#fff;color:#000;border:2px solid #000;padding:8px 10px;cursor:pointer;box-shadow:3px 3px 0 #555}
+.btn-volver{font-family:'Press Start 2P';font-size:6px;background:#000;color:#fff;border:2px solid #fff;padding:7px 9px;text-decoration:none}
+.caja{background:rgba(255,255,255,0.97);border:2px solid #000;box-shadow:8px 8px 0 #000;color:#000;padding:20px}
+.caja h1{font-family:'Press Start 2P';font-size:8px;text-align:center;line-height:1.8}
+label{font-family:'Press Start 2P';font-size:6px;display:block;margin-top:12px}
+input{width:100%;border:2px solid #000;padding:10px;margin-top:4px;font-family:'Courier Prime'}
+.btn{width:100%;margin-top:14px;padding:11px;background:#000;color:#fff;border:2px solid #000;font-family:'Press Start 2P';font-size:7px;cursor:pointer}
+#final{display:none;position:fixed;inset:0;z-index:15;background:rgba(0,0,0,0.45);justify-content:center}
+#final.activo{display:flex}
+.texto-final{width:92%;max-width:620px;height:100vh;overflow-y:auto;padding:90px 18px 300px 18px;scrollbar-width:none}
+.texto-final::-webkit-scrollbar{display:none}
+.linea{margin-bottom:14px;font-size:14px;line-height:1.7;color:#fff;text-shadow:0 0 8px rgba(255,255,255,0.6)}
+.linea.yo{color:#a9d6ff}
+.linea.dios{color:#ffffff;font-weight:bold}
+.linea.sistema{color:#888;font-family:'Press Start 2P';font-size:6px;text-align:center;margin:30px 0;line-height:2}
+.linea.espacio{margin-top:36px}
+.contacto-final{margin-top:60px;border:2px solid #fff;padding:14px;background:rgba(0,0,0,0.6)}
+.contacto-final h2{font-family:'Press Start 2P';font-size:7px;color:#fff;margin-bottom:10px}
+.contacto-final .dato{font-size:11px;color:#fff;line-height:1.8}
+.contacto-final .dato span{background:#fff;color:#000;padding:2px 5px;font-family:'Press Start 2P';font-size:6px}
+

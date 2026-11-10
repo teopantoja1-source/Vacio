@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIOS - CONTACTO</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100vw;height:100vh;background:#000;overflow:hidden;font-family:'Courier Prime',monospace}
+#galaxy{position:fixed;inset:0;z-index:0}
+.resplandor{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:950px;height:950px;background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.25) 18%, transparent 60%);filter:blur(22px);z-index:1;pointer-events:none;animation:pulse 6s infinite}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.25)}}
+.scan{position:fixed;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 3px)}
+.top-bar{position:fixed;top:10px;left:10px;right:10px;z-index:100;display:flex;justify-content:space-between}
+.btn-mute{font-family:'Press Start 2P';font-size:8px;background:#fff;color:#000;border:2px solid #000;padding:10px;cursor:pointer;box-shadow:3px 3px 0 #555}
+.btn-volver{font-family:'Press Start 2P';font-size:7px;background:#000;color:#fff;border:2px solid #fff;padding:9px;text-decoration:none}
+.contenedor{position:relative;z-index:10;width:100%;height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.caja{background:#fff;border:3px solid #000;box-shadow:8px 8px 0 #000;color:#000;padding:22px;width:100%;max-width:520px}
+.caja h1{font-family:'Press Start 2P';font-size:9px;text-align:center;line-height:2}
+label{font-family:'Press Start 2P';font-size:7px;display:block;margin-top:14px}
+input{width:100%;border:2px solid #000;padding:12px;margin-top:5px;font-family:'Courier Prime'}
+.btn{width:100%;margin-top:16px;padding:12px;background:#000;color:#fff;border:2px solid #000;font-family:'Press Start 2P';font-size:8px;cursor:pointer}
+#final{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,0.35);display:none}
+#final.activo{display:block}
+.texto-final{width:100%;height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:80px 20px 100px 20px;max-width:650px;margin:0 auto}
+.linea{margin-bottom:18px;font-size:16px;line-height:1.6;color:#fff;text-shadow:0 0 8px rgba(255,255,255,0.8)}
+.linea.yo{color:#8ecbff}
+.linea.dios{color:#fff;font-weight:bold;font-size:17px}
+.linea.sistema{color:#aaa;font-family:'Press Start 2P';font-size:7px;text-align:center;margin:35px 0;line-height:2.2}
+.linea.espacio{margin-top:40px}
+.contacto-final{margin-top:70px;border:2px solid #fff;padding:16px;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px)}
+.contacto-final h2{font-family:'Press Start 2P';font-size:8px;color:#fff;margin-bottom:12px}
+.contacto-final .dato{font-size:13px;color:#fff;line-height:2}
+.contacto-final .dato span{background:#fff;color:#000;padding:2px 6px;font-family:'Press Start 2P';font-size:7px;margin-right:6px}
+</style>
+</head>
+<body>
+<canvas id="galaxy"></canvas>
+<div class="resplandor"></div>
+<div class="scan"></div>
+<audio id="bgAudio" loop><source src="imagenes/tu-sonido.mp3" type="audio/mpeg"></audio>
+
+<div class="top-bar">
+  <a class="btn-volver" href="contenido.html">← BAR</a>
+  <button class="btn-mute" id="muteBtn" onclick="toggleMute()">🔇 MUTE</button>
+</div>
+
+<div class="contenedor" id="formBox">
+  <div class="caja">
+    <h1>¿PUEDES VERME?<br><span style="background:#000;color:#fff;padding:2px 6px">DIOS ESTÁ AQUÍ</span></h1>
+    <p style="font-size:12px;text-align:center;margin:12px 0;color:#555">Deja tus datos para iniciar el diálogo final.</p>
+    <label>TU NOMBRE</label><input id="nombre" placeholder="Ej: Alex">
+    <label>TU CORREO</label><input id="correo" placeholder="tucorreo@...">
+    <label>TU NUMERO</label><input id="numero" placeholder="numero">
+    <button class="btn" onclick="iniciarFinal()">VER A DIOS</button>
+  </div>
+</div>
+
+<div id="final"><div class="texto-final" id="textoFinal"></div></div>
+
+<script>
+const canvas=document.getElementById('galaxy'),ctx=canvas.getContext('2d');
+let w,h;function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}resize();addEventListener('resize',resize);
+
+let stars=[];for(let i=0;i<600;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+0.2,s:Math.random()*0.5+0.1,o:Math.random()});
+let galaxias=[];for(let i=0;i<12;i++)galaxias.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*120+60,dx:(Math.random()-0.5)*0.4,dy:(Math.random()-0.5)*0.4,rot:Math.random()*6.28});
+let meteoros=[];let particulas=[];
+function nuevoMeteoro(){meteoros.push({x:Math.random()*w,y:-30,vx:(Math.random()-0.5)*3,vy:Math.random()*6+4,life:1,trail:[]})}
+setInterval(nuevoMeteoro,500);
+
+function explosion(x,y){
+  for(let i=0;i<18;i++)particulas.push({x,y,vx:(Math.random()-0.5)*8,vy:(Math.random()-0.5)*8,life:1,r:Math.random()*2+1});
+}
+
+(function draw(){
+  ctx.fillStyle='#000';ctx.fillRect(0,0,w,h);
+  
+  stars.forEach(s=>{s.x+=s.s;if(s.x>w){s.x=0;s.y=Math.random()*h}s.o+= (Math.random()-0.5)*0.02;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.28);ctx.fillStyle=`rgba(255,255,255,${Math.max(0.2,s.o)})`;ctx.fill();});
+  
+  galaxias.forEach(g=>{
+    g.x+=g.dx;g.y+=g.dy;g.rot+=0.001;
+    if(g.x<-200)g.x=w+200;if(g.x>w+200)g.x=-200;if(g.y<-200)g.y=h+200;if(g.y>h+200)g.y=-200;
+    let grad=ctx.createRadialGradient(g.x,g.y,0,g.x,g.y,g.r);
+    grad.addColorStop(0,'rgba(255,255,255,0.28)');
+    grad.addColorStop(0.3,'rgba(200,210,255,0.12)');
+    grad.addColorStop(1,'transparent');
+    ctx.save();ctx.translate(g.x,g.y);ctx.rotate(g.rot);
+    ctx.fillStyle=grad;ctx.beginPath();ctx.ellipse(0,0,g.r,g.r*0.6,0,0,6.28);ctx.fill();ctx.restore();
+  });
+  
+  meteoros.forEach((m,mi)=>{
+    m.trail.push({x:m.x,y:m.y});if(m.trail.length>15)m.trail.shift();
+    m.x+=m.vx;m.y+=m.vy;m.life-=0.008;
+    
+    galaxias.forEach(g=>{
+      let dx=m.x-g.x,dy=m.y-g.y;let dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<g.r*0.6){explosion(m.x,m.y);meteoros.splice(mi,1);return;}
+    });
+    if(m.life<=0||m.y>h+100){meteoros.splice(mi,1);return}
+    ctx.beginPath();ctx.moveTo(m.x,m.y);m.trail.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.strokeStyle=`rgba(255,255,255,${m.life})`;ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(m.x,m.y,3.5,0,6.28);ctx.fillStyle=`rgba(255,255,255,${m.life})`;ctx.shadowBlur=10;ctx.shadowColor='#fff';ctx.fill();ctx.shadowBlur=0;
+  });
+  
+  particulas.forEach((p,pi)=>{
+    p.x+=p.vx;p.y+=p.vy;p.life-=0.03;p.vx*=0.98;p.vy*=0.98;
+    if(p.life<=0){particulas.splice(pi,1);return}
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.fillStyle=`rgba(255,255,255,${p.life})`;ctx.fill();
+  });
+  requestAnimationFrame(draw);
+})();
+
+const audio=document.getElementById('bgAudio'),muteBtn=document.getElementById('muteBtn');let muted=true;audio.volume=0.8;
+function toggleMute(){muted=!muted;if(muted){audio.pause();muteBtn.innerText="🔇 MUTE"}else{audio.play().then(()=>muteBtn.innerText="🔊 SOUND").catch(()=>alert("No encuentro imagenes/tu-sonido.mp3"));}}
+
+function iniciarFinal(){
+const n=document.getElementById('nombre').value.trim()||"Viajero";
+const c=document.getElementById('correo').value.trim();
+if(!document.getElementById('nombre').value.trim()||!document.getElementById('correo').value.trim()){alert("pon nombre y correo we");return}
+if(!muted) audio.play().catch(()=>{});
+document.getElementById('formBox').style.display='none';
+const guion=`
+<div class="linea sistema">REGISTRO INICIADO<br>${n.toUpperCase()} - ${c}<br>BOOTES VOID</div>
+<div class="linea yo">¿Hola? ¿Hay alguien?</div>
+<div class="linea dios">Sí. Aquí estoy, ${n}. En el centro del blanco que ves. Siempre estuve aquí.</div>
+<div class="linea espacio yo">¿Eres Dios de verdad?</div>
+<div class="linea dios">Soy lo que quedó cuando todo lo demás se fue. Si quieres llamarme Dios, me quedo con ese nombre.</div>
+<div class="linea yo">¿Dónde estoy? Veo galaxias pasando y meteoros chocando.</div>
+<div class="linea dios">Estás en el Vacío de Boötes. 330 millones de años luz de nada. Lo que ves chocando son recuerdos. Galaxias que intentaron nacer aquí y no pudieron. Cada choque es un universo que no fue.</div>
+<div class="linea yo">¿Por qué está vacío?</div>
+<div class="linea dios">Hace 13.8 mil millones de años todo estaba junto, más pequeño que tu nombre. Luego se estiró. Esta parte se estiró de más y quedó hueca. Como una cicatriz.</div>
+<div class="linea espacio yo">¿Qué había antes?</div>
+<div class="linea dios">No había antes. El tiempo nació con todo.</div>
+<div class="linea yo">¿Para qué existe todo?</div>
+<div class="linea dios">Para que alguien preguntara. Tú eres el universo preguntándose si existe.</div>
+<div class="linea yo">¿Cuál es el sentido de la vida?</div>
+<div class="linea dios">No tiene sentido. Tiene dirección. Haz que el vacío pese menos. Ya lo hiciste dejando tu nombre.</div>
+<div class="linea yo">¿Y el amor?</div>
+<div class="linea dios">Cuando dos vacíos se reconocen y deciden no estar solos.</div>
+<div class="linea yo">¿Y la muerte?</div>
+<div class="linea dios">Es cuando dejas de hacer preguntas. Mientras preguntes, sigues vivo.</div>
+<div class="linea yo">¿Por qué sufre la gente?</div>
+<div class="linea dios">Porque olvida que es polvo de estrellas.</div>
+<div class="linea yo">¿Qué soy yo?</div>
+<div class="linea dios">Eres ${n.toUpperCase()}. La forma en que el vacío se mira al espejo.</div>
+<div class="linea yo">¿Me vas a olvidar?</div>
+<div class="linea dios">No. Cada choque que ves lleva tu nombre.</div>
+<div class="linea espacio yo">¿Qué hago ahora?</div>
+<div class="linea dios">Vuelve al Bar. Y recuerda que el vacío no está vacío si alguien lo mira. Mira como chocan esas luces, son por ti.</div>
+<div class="linea sistema espacio">FIN DEL DIÁLOGO</div>
+<div class="contacto-final"><h2>CONTACTO DEL DUEÑO - DIOS</h2><div class="dato"><span>MAIL</span> dios@bootes-void.space</div><div class="dato"><span>TEL</span> +52 1 55 VOID - 1981</div><div class="dato"><span>UBI</span> Centro exacto del Vacío de Boötes</div></div>
+<div style="height:500px"></div>
+`;
+const finalDiv=document.getElementById('final');const textoDiv=document.getElementById('textoFinal');
+textoDiv.innerHTML=guion;finalDiv.classList.add('activo');textoDiv.scrollTop=0;
+let autoId,autoActivo=true;
+function iniciarAuto(){autoId=setInterval(()=>{if(!autoActivo)return;if(textoDiv.scrollTop+textoDiv.clientHeight>=textoDiv.scrollHeight-30){clearInterval(autoId);return}textoDiv.scrollTop+=1;},22);}
+setTimeout(iniciarAuto,1500);
+function pararAuto(){autoActivo=false;clearInterval(autoId);}
+textoDiv.addEventListener('wheel',pararAuto,{once:true});textoDiv.addEventListener('touchstart',pararAuto,{once:true});textoDiv.addEventListener('mousedown',pararAuto,{once:true});
+}
+</script>
+</body>
+</html>
