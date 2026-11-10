@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLUB DEL VACÍO - REVENTÓN</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12 url('imagenes/espacio.png') fixed;background-size:cover;font-family:'Press Start 2P',monospace;color:#fff;min-height:100vh}
+.header-club{position:sticky;top:0;background:rgba(0,0,0,0.9);border-bottom:3px solid #ff0055;padding:15px;display:flex;justify-content:space-between;align-items:center;z-index:50;box-shadow:0 0 20px #ff0055}
+.header-club h1{font-size:12px;color:#00f3ff;text-shadow:2px 2px 0 #ff0055}
+.btn-musica{font-family:'Press Start 2P';font-size:8px;padding:8px 12px;background:#00f3ff;color:#000;border:2px solid #fff;cursor:pointer}
+.reddit-container{max-width:700px;margin:20px auto;padding:20px;display:flex;flex-direction:column;gap:20px}
+.post{border:3px solid #fff;background:rgba(10,10,25,0.9);padding:15px;box-shadow:6px 6px 0 #000;position:relative}
+.post-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;border-bottom:2px dashed #333;padding-bottom:10px}
+.avatar-among{width:50px;height:50px;object-fit:contain;image-rendering:pixelated}
+.user-info{font-size:8px}
+.user-info span{color:#ff0055;display:block;margin-top:4px;font-size:7px}
+.post-titulo{font-size:10px;color:#00f3ff;margin-bottom:10px;line-height:1.5}
+.post-texto{font-size:8px;line-height:1.9;color:#ddd;background:rgba(0,0,0,0.5);padding:10px;border-left:3px solid #ff0055}
+.upvotes{margin-top:10px;font-size:7px;color:#ffae00}
+.luces-fiesta{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;animation:lucesClub 0.5s infinite}
+@keyframes lucesClub{0%{background:radial-gradient(circle at 20% 20%, rgba(255,0,85,0.15), transparent)}50%{background:radial-gradient(circle at 80% 80%, rgba(0,243,255,0.15), transparent)}100%{background:radial-gradient(circle at 50% 50%, rgba(255,255,0,0.1), transparent)}}
+</style>
+</head>
+<body>
+<div class="luces-fiesta"></div>
+
+<div class="header-club">
+  <h1>👽 CLUB DEL VACÍO - r/BootesVoid</h1>
+  <button class="btn-musica" id="btnMusica" onclick="toggleMusica()">🔇 MUSICA OFF</button>
+</div>
+
+<!-- MUSICA - PON TU CANCION AQUI -->
+<audio id="musicaClub" loop>
+  <source src="imagenes/fiesta.mp3" type="audio/mpeg">
+  <source src="fiesta.mp3" type="audio/mpeg">
+</audio>
+
+<div class="reddit-container">
+  
+  <!-- POST 1 -->
+  <div class="post">
+    <div class="post-header">
+      <img src="imagenes/nave1.png" class="avatar-among">
+      <div class="user-info">u/AmongRojo <span>• Astrónomo impostor • hace 2h</span></div>
+    </div>
+    <div class="post-titulo">HIPOTESIS: El vacío es una zona de exterminio alien?</div>
+    <div class="post-texto">Bro, piénsalo. 330 millones de años luz sin nada? Para mí que una civilización Tipo III barrió con todo para hacer espacio para su Dyson Swarm. Por eso solo quedan 60 galaxias escondidas. ¿Coincidencia? No lo creo.</div>
+    <div class="upvotes">▲ 2.3k upvotes • 342 comentarios</div>
+  </div>
+
+  <!-- POST 2 -->
+  <div class="post">
+    <div class="post-header">
+      <img src="imagenes/nave2.jpg" class="avatar-among">
+      <div class="user-info">u/AmongCyan <span>• Tripulante científico • hace 5h</span></div>
+    </div>
+    <div class="post-titulo">CURIOSIDAD: Si vives en el centro, tu cielo es negro</div>
+    <div class="post-texto">Dato perturbador: Si la Vía Láctea estuviera en el centro del Vacío de Boötes, no habríamos descubierto otras galaxias hasta los años 60s. Imagínate vivir toda la historia creyendo que eres el único en el universo. Puro terror cósmico.</div>
+    <div class="upvotes">▲ 5.1k upvotes • 892 comentarios</div>
+  </div>
+
+  <!-- POST 3 -->
+  <div class="post">
+    <div class="post-header">
+      <img src="imagenes/Nave3.jpg" class="avatar-among">
+      <div class="user-info">u/AmongMorado <span>• Teorico conspiranoico • hace 8h</span></div>
+    </div>
+    <div class="post-titulo">Teoría de burbujas de jabón - EL VACIO SE FUSIONÓ</div>
+    <div class="post-texto">Mi hipótesis favorita: El vacío no nació grande, se hizo. Vacíos chiquitos se fueron fusionando como burbujas de jabón durante miles de millones de años hasta formar este monstruo de 250M años luz. Es el Thanos de los vacíos.</div>
+    <div class="upvotes">▲ 1.8k upvotes • 120 comentarios</div>
+  </div>
+
+  <!-- POST 4 -->
+  <div class="post">
+    <div class="post-header">
+      <img src="imagenes/vacio.png" class="avatar-among">
+      <div class="user-info">u/VacioBootes_Official <span>• El vacío mismo • hace 12h</span></div>
+    </div>
+    <div class="post-titulo">AMA: Soy el Vacío de Boötes, pregúntenme lo que quieran</div>
+    <div class="post-texto">Soy 10 veces menos denso que el resto del universo. Me descubrieron en 1981 y al principio pensaron que estaba 100% vacío. Spoiler: no lo estoy, tengo 60 galaxias perdidas dentro formando un tubo. ¿Qué quieren saber del lugar más solitario?</div>
+    <div class="upvotes">▲ 10k upvotes • 2k comentarios</div>
+  </div>
+
+</div>
+
+<script>
+let sonando = false;
+const musica = document.getElementById('musicaClub');
+const btn = document.getElementById('btnMusica');
+
+// Intenta prender la musica automatico al entrar (si no deja, el usuario le pica)
+window.addEventListener('click', () => {
+  if(!sonando){ toggleMusica(); }
+}, {once:true});
+
+function toggleMusica(){
+  if(sonando){
+    musica.pause();
+    btn.innerText = "🔇 MUSICA OFF";
+    sonando = false;
+  } else {
+    musica.volume = 0.4;
+    musica.play().catch(()=>{});
+    btn.innerText = "🔊 MUSICA ON - REVENTON";
+    sonando = true;
+  }
+}
+</script>
+</body>
+</html>
