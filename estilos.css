@@ -19,7 +19,7 @@ body {
   position: relative; 
 }
 
-/* --- INFORMACIÓN PIXELADA DE BOÖTES --- */
+
 .texto-bootes {
   position: absolute;
   top: 10%; /* Posición superior */
@@ -76,7 +76,7 @@ body {
   transform: translateY(-3px); 
 }
 
-/* --- TIERRA --- */
+
 .contenedor-tierra {
   position: absolute;
   bottom: 0;
@@ -102,7 +102,7 @@ body {
   }
 }
 
-/* --- COHETE Y FÍSICAS DE DESPEGUE --- */
+
 .cohete {
   position: absolute;
   bottom: 250px; 
@@ -134,7 +134,7 @@ body {
   }
 }
 
-/* --- ESTRELLAS FUGACES --- */
+
 .estrella-fugaz {
   position: absolute;
   width: 120px; 
@@ -177,7 +177,7 @@ body {
   }
 }
 
-/* --- COHETE Y FÍSICAS DE DESPEGUE --- */
+
 .cohete {
   position: absolute;
   bottom: 250px; 
@@ -206,5 +206,50 @@ body {
   100% {
     bottom: 120vh; 
     transform: translateX(-50%) scale(0.6);
+  }
+}
+
+body {
+  padding-top: 45px;
+}
+
+.marquesina-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(10, 10, 25, 0.85);
+  border-bottom: 2px solid #5d6dbe;
+  box-shadow: 0 0 10px rgba(93, 109, 190, 0.5);
+  overflow: hidden;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.marquesina-content {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: desplazamiento 25s linear infinite;
+}
+
+.marquesina-bar:hover .marquesina-content {
+  animation-play-state: paused;
+}
+
+.marquesina-content span {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #00ffcc;
+  text-shadow: 0 0 5px #00ffcc;
+  padding-right: 50px;
+}
+
+@keyframes desplazamiento {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
