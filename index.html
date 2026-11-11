@@ -1,46 +1,48 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ir al vacío</title>
+  <title>Ir al vacio</title>
+
 
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-  <div class="marquesina-bar">
-    <div class="marquesina-content">
-      <span>✦ ADVERTENCIA: Entrando en una de las regiones más solitarias del cosmos ✦ 330 millones de años luz de oscuridad casi absoluta ✦ Presiona "IR AL VACÍO" para iniciar secuencia de despegue ✦</span>
-      <span>✦ ADVERTENCIA: Entrando en una de las regiones más solitarias del cosmos ✦ 330 millones de años luz de oscuridad casi absoluta ✦ Presiona "IR AL VACÍO" para iniciar secuencia de despegue ✦</span>
-    </div>
+    <div class="texto-bootes">
+    <h1>EL VACÍO DE BOÖTES</h1>
+    <p>Una gigantesca región del espacio de 330 millones de años luz de diámetro con poquísimas galaxias. Uno de los lugares más solitarios del universo.</p>
   </div>
 
-  <div class="texto-bootes">
-    <h1>EL VACÍO DE BOÖTES</h1>
-    <p>Una abismal extensión cósmica de 330 millones de años luz casi desprovista de galaxias. Bienvenido a la soledad absoluta del universo.</p>
-  </div>
 
   <img src="imagenes/cohete.png" id="cohete" class="cohete" alt="cohete">
 
+
   <button id="btnVacio" class="btn-vacio">ir al vacio</button>
 
-  <div class="contenedor-tierra">
+   <div class="contenedor-tierra">
     <img src="imagenes/tierra.png" class="tierra" alt="tierra">
   </div>
+
 
   <div class="estrella-fugaz ef-1"></div>
   <div class="estrella-fugaz ef-2"></div>
   <div class="estrella-fugaz ef-3"></div>
 
-  <script>
+    <script>
     const btnVacio = document.getElementById('btnVacio');
     const cohete = document.getElementById('cohete');
     const paginaDestino = 'info.html';  
 
     btnVacio.addEventListener('click', () => {
+
       cohete.classList.add('despegar');
+
 
       setTimeout(() => {
         window.location.href = paginaDestino;
